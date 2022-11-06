@@ -18,6 +18,14 @@ MatrixGen::~MatrixGen() {
 
     delete [] data;
 }
+/*
+MatrixGen::MatrixGen():col(3),row(3){
+	data=new float *[row];
+	for(int i=0;i<row;i++)
+	{
+	  data[i]=new float[col];
+	}
+}*/
 
 MatrixGen::MatrixGen(int dim) {
 	assert(dim != 0);
@@ -29,6 +37,18 @@ MatrixGen::MatrixGen(int dim) {
 	  data[i]=new float[col];
 	}
 }
+/*
+MatrixGen& MatrixGen::operator=(const MatrixGen& obj){
+	this->col = obj.col;
+	this->row = obj.row;
+    for(int i = 0; i < row; ++i)
+        delete [] data[i];
+
+    delete [] data;
+	this-> data = obj.data;
+	return *this;
+}*/
+
 
 float MatrixGen::randBtwFloat(void)
 {

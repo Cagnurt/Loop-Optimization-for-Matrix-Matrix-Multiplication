@@ -18,10 +18,12 @@ public:
 	int col;
 	int row;
 	virtual ~MatrixGen();
+	//MatrixGen(void);
 	MatrixGen(int dim);
 	float randBtwFloat(void);
 	void fill(void);
 	void print(void);
+	//MatrixGen& operator=(const MatrixGen& obj);
 
 };
 

@@ -7,15 +7,43 @@
 //============================================================================
 
 #include <iostream>
-#include "MatMul.h"
+#include "SquareMatMul.h"
 #include "MatrixGen.h"
 using namespace std;
 
 int main() {
+	int dim = 2;
+	MatrixGen A(dim);
+	A.fill();
+	cout<<"First matrix is generated!"<<endl;
+	A.print();
+	MatrixGen B(dim);
+	B.fill();
+	B.print();
+	cout<<"Second matrix is generated!"<<endl;
+	SquareMatMul mult(A, B);
+/*
+	for(int i = 0; i < dim; i++)
+	{
+		for(int j = 0; j < dim; j++)
+		{
+			cout<< mult.firstMat[i][j]<<" ";
+		}
+		cout <<" "<<endl;
+	}
 
+	for(int i = 0; i < dim; i++)
+	{
+		for(int j = 0; j < dim; j++)
+		{
+			cout<< mult.secondMat[i][j]<<" ";
+		}
+		cout << " "<<endl;
+	}
+*/
 #ifdef Experiment-1
 	int increment = 1000;
-	for (int dim=10000; dim > 0; dim-=increment){
+	for (int dim=8000; dim > 0; dim-=increment){
 		cout<<"Dimension="<<dim<<":"<< endl;
 		MatrixGen A(dim);
 		A.fill();
@@ -23,11 +51,9 @@ int main() {
 		MatrixGen B(dim);
 		B.fill();
 		cout<<"Second matrix is generated!"<<endl;
-		MatMul mult(dim);
+		SquareMatMul mult(A, B);
 		mult.possibleIndexingTimeAnalysis(A.data, B.data);
 	}
-	return 0;
-}
 #endif
 
 #ifdef Experiment-2
@@ -40,7 +66,7 @@ int main() {
 		MatrixGen B(dim);
 		B.fill();
 		cout<<"Second matrix is generated!"<<endl;
-		MatMul mult(dim);
+		SquareMatMul mult(A, B);
 		mult.onlyUnrollingTimeAnalysis(A.data, B.data);
 	}
 #endif
@@ -55,7 +81,7 @@ int main() {
 		MatrixGen B(dim);
 		B.fill();
 		cout<<"Second matrix is generated!"<<endl;
-		MatMul mult(dim);
+		SquareMatMul mult(A, B);
 		mult.unrollingWithFissionTimeAnalysis(A.data, B.data);
 	}
 #endif
@@ -83,7 +109,7 @@ int main() {
 	MatrixGen B(dim);
 	B.fill();
 	cout<<"Second matrix is generated!"<<endl;
-	MatMul mult(dim);
+	SquareMatMul mult(A, B);
 	mult.blockSizeTimeAnalysis(A.data,B.data,start, stop,stepSize);
 #endif
 
@@ -96,17 +122,17 @@ int main() {
 	MatrixGen B(dim);
 	B.fill();
 	cout<<"Second matrix is generated!"<<endl;
-	MatMul mult(dim);
+	SquareMatMul mult(A, B);
 	mult.changeBlockSize(2);
-	mult.bijk(A.data, B.data);
+	mult.bijk();
 	mult.printMat();
 	mult.reset();
 	cout<<" "<< endl;
-	mult.bijk_updated(A.data, B.data);
+	mult.bijk_updated();
 	mult.printMat();
 	mult.reset();
 	cout<<" "<< endl;
-	mult.bikj(A.data, B.data);
+	mult.bikj();
 	mult.printMat();
 	mult.reset();
 	cout<<"Time analysis part:"<< endl;
@@ -119,9 +145,9 @@ int main() {
 		MatrixGen B(dim);
 		B.fill();
 		cout<<"Second matrix is generated!"<<endl;
-		MatMul mult(dim);
+		SquareMatMul mult(A, B);
 		mult.changeBlockSize(64);
-		mult.loopBlockingTimeAnalysis(A.data, B.data);
+		mult.loopBlockingTimeAnalysis();
 	}
 #endif
 
@@ -135,9 +161,9 @@ int main() {
 		MatrixGen B(dim);
 		B.fill();
 		cout<<"Second matrix is generated!"<<endl;
-		MatMul mult(dim);
+		SquareMatMul mult(A, B);
 		mult.changeBlockSize(64);
-		mult.bikjUnrolledTimeAnalysis(A.data, B.data);
+		mult.bikjUnrolledTimeAnalysis();
 	}
 
 #endif
